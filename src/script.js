@@ -77,12 +77,9 @@ function cartesianPlotitng(i) {
   const branchAngle = ((i % galaxyParams.branches) / galaxyParams.branches) * Math.PI * 2;
 
   // Create a random, more scattered pattern.
-  const randomX = Math.random() ** galaxyParams.randomnessLevel * (Math.random() < 0.5 ? 1 : -1)
-  * galaxyParams.randomness * radius;
-  const randomY = Math.random() ** galaxyParams.randomnessLevel * (Math.random() < 0.5 ? 1 : -1)
-  * galaxyParams.randomness * radius;
-  const randomZ = Math.random() ** galaxyParams.randomnessLevel * (Math.random() < 0.5 ? 1 : -1)
-  * galaxyParams.randomness * radius;
+  const randomX = (Math.random() ** galaxyParams.randomnessLevel) * (Math.random() < 0.5 ? 1 : -1);
+  const randomY = (Math.random() ** galaxyParams.randomnessLevel) * (Math.random() < 0.5 ? 1 : -1);
+  const randomZ = (Math.random() ** galaxyParams.randomnessLevel) * (Math.random() < 0.5 ? 1 : -1);
 
   // Distrubutes star along the x, y, z
   starPositions[i3 + 0] = Math.cos(branchAngle + spinAngle) * radius + randomX; // x
@@ -169,6 +166,8 @@ function createGUI() {
   gui.add(galaxyParams, 'spin').min(-5).max(5).step(1)
     .onFinishChange(createGalaxy);
   gui.add(galaxyParams, 'randomness').min(-0).max(2).step(0.001)
+    .onFinishChange(createGalaxy);
+  gui.add(galaxyParams, 'randomnessLevel').min(1).max(10).step(0.001)
     .onFinishChange(createGalaxy);
   gui.addColor(galaxyParams, 'insideColor').onFinishChange(createGalaxy);
   gui.addColor(galaxyParams, 'outsideColor').onFinishChange(createGalaxy);
